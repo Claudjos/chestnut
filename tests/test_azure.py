@@ -23,7 +23,7 @@ TESTS
 def test_get():
 	req = func.HttpRequest(
 		"GET",
-		"/somewhere/1",
+		"/somewhere/1?name=johnny",
 		headers={"content-type": "application/json"},
 		route_params={"id": "1"},
 		params={"name": "johnny"},
@@ -31,7 +31,7 @@ def test_get():
 	)
 	res = main(req)
 	assert res.status_code == 200
-	assert res.get_body() == b'{"id": "1", "name": "johnny"}'
+	assert res.get_body() == b'{"id":"1","name":"johnny"}'
 	assert res.headers["x-test"] == "test"
 
 
@@ -55,4 +55,4 @@ def test_post():
 	)
 	res = main3(req)
 	assert res.status_code == 200
-	assert res.get_body() == b'{"foo": "bar"}'
+	assert res.get_body() == b'{"foo":"bar"}'

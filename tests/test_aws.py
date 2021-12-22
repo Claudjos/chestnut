@@ -62,4 +62,4 @@ def test_post():
 	}
 	res = post_handler(event, None)
 	assert res["statusCode"] == 200
-	assert res["body"] == '{"foo": "bar"}'
+	assert res["body"] == '{"foo":"bar"}'
