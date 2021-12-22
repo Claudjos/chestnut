@@ -30,7 +30,7 @@ class Response(http.Response):
 	@property
 	def body(self) -> bytes:
 		if self.is_json():
-			return dumps(self._body, cls=self.JSON_ENCODER).encode()
+			return dumps(self._body, separators=(',', ':'), cls=self.JSON_ENCODER).encode()
 		elif self.is_stream():
 			return ("".join(self._body)).encode()
 		elif isinstance(self._body, str):
