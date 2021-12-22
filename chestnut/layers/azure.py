@@ -21,10 +21,9 @@ def azure_to_request(req: func.HttpRequest) -> Request:
 	"""
 	return Request(
 		method=req.method,
-		path=req.url,
+		uri=req.url,
 		headers=req.headers,
 		route=req.route_params,
-		query=req.params,
 		body=req.get_body()
 	)
 
