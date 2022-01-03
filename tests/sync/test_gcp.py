@@ -1,4 +1,4 @@
-from tests.handlers import handle_get, handle_post
+from .handlers import handle_get, handle_post
 from chestnut.layers.gcp import gcp_layer
 from io import BytesIO
 import flask
