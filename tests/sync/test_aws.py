@@ -1,4 +1,4 @@
-from tests.handlers import handle_get, handle_post, handle_get_stream
+from .handlers import handle_get, handle_post, handle_get_stream
 from chestnut.layers.aws import aws_layer
 from json import loads
 
