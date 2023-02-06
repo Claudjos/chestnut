@@ -16,7 +16,7 @@ class Response(http.Response):
 			status_code = status
 		super().__init__(*args, **kwargs, status_code=status_code)
 		self.status = status_code
-		if self.is_json:
+		if self.is_json():
 			self.headers["Content-Type"] = "application/json"
 		if mimetype is not None:
 			self.headers["Content-Type"] = mimetype
