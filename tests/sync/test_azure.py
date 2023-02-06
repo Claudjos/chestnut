@@ -1,4 +1,4 @@
-from tests.handlers import handle_get, handle_post, handle_get_stream
+from .handlers import handle_get, handle_post, handle_get_stream
 from chestnut.layers.azure import azure_layer
 import azure.functions as func
 
