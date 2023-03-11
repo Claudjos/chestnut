@@ -10,7 +10,7 @@ with open(path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 NAME = "chestnut"
 VERSION = "1.0.0"
 REQUIRES = [
-    "pyfir>=0.0.5"
+    "pyfir>=0.0.5,<1.0.0"
 ]
 
 
