@@ -22,16 +22,16 @@ def middleware(f):
 			from chestnut.layers.azure import azure_to_request, response_to_azure
 			async def wrapper(req: func.HttpRequest) -> func.HttpResponse:
 				return await framework_layer(azure_to_request, response_to_azure, f, req)
-		if env == "AWS":
+		elif env == "AWS":
 			from chestnut.layers.aws import aws_to_request, response_to_aws
 			async def wrapper(req: dict, ctx: dict) -> dict:
 				return await framework_layer(aws_to_request, response_to_aws, f, req)
-		if env == "GCP":
+		elif env == "GCP":
 			import flask
 			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
 			async def wrapper(req: flask.Request) -> flask.Response:
 				return await framework_layer(gcp_to_request, response_to_gcp, f, req)
-		if env == "FLASK":
+		elif env == "FLASK":
 			import flask
 			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
 			async def wrapper(*args, **kwargs) -> flask.Response:
@@ -44,16 +44,16 @@ def middleware(f):
 			from chestnut.layers.azure import azure_to_request, response_to_azure
 			def wrapper(req: func.HttpRequest) -> func.HttpResponse:
 				return framework_layer(azure_to_request, response_to_azure, f, req)
-		if env == "AWS":
+		elif env == "AWS":
 			from chestnut.layers.aws import aws_to_request, response_to_aws
 			def wrapper(req: dict, ctx: dict) -> dict:
 				return framework_layer(aws_to_request, response_to_aws, f, req)
-		if env == "GCP":
+		elif env == "GCP":
 			import flask
 			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
 			def wrapper(req: flask.Request) -> flask.Response:
 				return framework_layer(gcp_to_request, response_to_gcp, f, req)
-		if env == "FLASK":
+		elif env == "FLASK":
 			import flask
 			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
 			def wrapper(*args, **kwargs) -> flask.Response:
