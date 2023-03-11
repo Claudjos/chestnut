@@ -32,7 +32,7 @@ def middleware(f):
 				return framework_layer(azure_to_request, response_to_azure, f, req)
 		if env == "AWS":
 			from chestnut.layers.aws import aws_to_request, response_to_aws
-			def wrapper(req: dict) -> dict:
+			def wrapper(req: dict, ctx: dict) -> dict:
 				return framework_layer(aws_to_request, response_to_aws, f, req)
 		if env == "GCP":
 			import flask
