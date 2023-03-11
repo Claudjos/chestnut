@@ -7,7 +7,7 @@ from io import BytesIO
 
 os.environ["CHESTNUT_MIDDLEWARE"] = "gcp"
 main_sync = middleware(ctrl_sync)
-#main_async = middleware(ctrl_async)
+main_async = middleware(ctrl_async)
 
 
 req = flask.Request({
@@ -25,9 +25,18 @@ req.url_rule = "/somewhere/<id>" # pointless
 req.view_args = {"id": "1"}
 
 
-def test_get():
+def test_sync():
 	global req
 	res = main_sync(req)
+	assert res.status_code == 200
+	assert res.json == {"id": "1", "name": "jhonny"}
+	assert res.headers["x-test"] == "test"
+
+
+@pytest.mark.asyncio
+async def test_async():
+	global req
+	res = await main_async(req)
 	assert res.status_code == 200
 	assert res.json == {"id": "1", "name": "jhonny"}
 	assert res.headers["x-test"] == "test"
