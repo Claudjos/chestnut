@@ -1,23 +1,11 @@
 from .handlers import handle_get, handle_post, handle_get_stream
-from chestnut.layers.azure import azure_layer
+from chestnut import layer
 import azure.functions as func
 
 
-def main(req: func.HttpRequest) -> func.HttpResponse:
-	return azure_layer(handle_get, req)
-
-
-def main2(req: func.HttpRequest) -> func.HttpResponse:
-	return azure_layer(handle_get_stream, req)
-
-
-def main3(req: func.HttpRequest) -> func.HttpResponse:
-	return azure_layer(handle_post, req)
-
-
-"""
-TESTS
-"""
+main = layer(handle_get, "azure")
+main2 = layer(handle_get_stream, "azure")
+main3 = layer(handle_post, "azure")
 
 
 def test_get():

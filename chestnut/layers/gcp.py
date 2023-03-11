@@ -1,7 +1,5 @@
 import flask
-from typing import Callable
 from chestnut.http import Request, Response
-from .framework import framework_layer
 
 
 def response_to_gcp(response: Response) -> flask.Response:
@@ -28,7 +26,3 @@ def gcp_to_request(req: flask.Request) -> Request:
 		query={key: req.args.getlist(key) for key in list(req.args)},
 		body=req.stream.read()
 	)
-
-
-def gcp_layer(handler: Callable, req: flask.Request) -> flask.Response:
-	return framework_layer(gcp_to_request, response_to_gcp, handler, req)

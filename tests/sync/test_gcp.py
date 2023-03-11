@@ -1,20 +1,11 @@
 from .handlers import handle_get, handle_post
-from chestnut.layers.gcp import gcp_layer
+from chestnut import layer
 from io import BytesIO
 import flask
 
 
-def get_handler(req: flask.Request) -> flask.Response:
-	return gcp_layer(handle_get, req)
-
-
-def post_handler(req: flask.Request) -> flask.Response:
-	return gcp_layer(handle_post, req)
-
-
-"""
-TESTS
-"""
+get_handler = layer(handle_get, "gcp")
+post_handler = layer(handle_post, "gcp")
 
 
 def test_get():
