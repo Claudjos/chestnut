@@ -5,12 +5,17 @@ _SUPPORTED = ["AZURE", "AWS", "GCP", "FLASK"]
 
 
 def middleware(f):
-	# Establish environment
-	global _SUPPORTED
+	# Establishes environment
 	env = os.environ.get("CHESTNUT_MIDDLEWARE", None)
 	if env is None:
 		raise Exception("CHESTNUT_MIDDLEWARE is not set.")
-	env = env.upper()
+	return layer(f, env)
+
+
+def layer(f, chestnut_middleware: str):
+	# Input validation
+	global _SUPPORTED
+	env = chestnut_middleware.upper()
 	if env.upper() not in _SUPPORTED:
 		raise Exception("Allowed values for CHESTNUT_MIDDLEWARE are: {}.".format(",".join(_SUPPORTED)))
 	# Choose middleware
