@@ -1,7 +1,7 @@
 import os, inspect
 
 
-_SUPPORTED = ["AZURE", "AWS", "GCP"]
+_SUPPORTED = ["AZURE", "AWS", "GCP", "FLASK"]
 
 
 def middleware(f):
@@ -31,6 +31,11 @@ def middleware(f):
 			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
 			async def wrapper(req: flask.Request) -> flask.Response:
 				return await framework_layer(gcp_to_request, response_to_gcp, f, req)
+		if env == "FLASK":
+			import flask
+			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
+			async def wrapper(*args, **kwargs) -> flask.Response:
+				return await framework_layer(gcp_to_request, response_to_gcp, f, flask.request)
 	else:
 		# functions
 		from chestnut.layers.framework import framework_layer
@@ -48,6 +53,11 @@ def middleware(f):
 			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
 			def wrapper(req: flask.Request) -> flask.Response:
 				return framework_layer(gcp_to_request, response_to_gcp, f, req)
+		if env == "FLASK":
+			import flask
+			from chestnut.layers.gcp import gcp_to_request, response_to_gcp
+			def wrapper(*args, **kwargs) -> flask.Response:
+				return framework_layer(gcp_to_request, response_to_gcp, f, flask.request)
 	# Set
 	wrapper.__name__ = f.__name__
 	wrapper.__doc__ = f.__doc__
