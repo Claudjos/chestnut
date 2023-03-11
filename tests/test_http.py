@@ -38,3 +38,13 @@ def test_response_body_string():
 def test_response_override_content():
 	r = Response(status_code=200, body={"a":1}, mimetype="custom")
 	assert r.mimetype == "custom"
+
+
+def test_content_type_json():
+	r = Response(body=[])
+	assert r.headers.get("content-type", "") == "application/json"
+
+
+def test_content_type():
+	r = Response(body="ciao")
+	assert r.headers.get("content-type", "") == ""

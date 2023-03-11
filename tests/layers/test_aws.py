@@ -1,23 +1,11 @@
 from .handlers import handle_get, handle_post, handle_get_stream
-from chestnut.layers.aws import aws_layer
+from chestnut import layer
 from json import loads
 
 
-def get_handler(event, context):
-	return aws_layer(handle_get, event)
-
-
-def stream_handler(event, context):
-	return aws_layer(handle_get_stream, event)
-
-
-def post_handler(event, context):
-	return aws_layer(handle_post, event)
-
-
-"""
-TESTS
-"""
+get_handler = layer(handle_get, "aws")
+stream_handler = layer(handle_get_stream, "aws")
+post_handler = layer(handle_post, "aws")
 
 
 def test_get():

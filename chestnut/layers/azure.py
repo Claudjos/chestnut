@@ -1,7 +1,5 @@
-from typing import Callable
-from chestnut.http import Request, Response
 import azure.functions as func
-from .framework import framework_layer
+from chestnut.http import Request, Response
 
 
 def response_to_azure(response: Response) -> func.HttpResponse:
@@ -26,7 +24,3 @@ def azure_to_request(req: func.HttpRequest) -> Request:
 		route=req.route_params,
 		body=req.get_body()
 	)
-
-
-def azure_layer(handler: Callable, req: func.HttpRequest) -> func.HttpResponse:
-	return framework_layer(azure_to_request, response_to_azure, handler, req)

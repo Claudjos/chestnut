@@ -1,6 +1,4 @@
-from typing import Callable
 from chestnut.http import Request, Response
-from .framework import framework_layer
 
 
 def response_to_aws(response: Response) -> dict:
@@ -26,7 +24,3 @@ def aws_to_request(event: dict) -> Request:
 		query=event.get("multiValueQueryStringParameters"),
 		body=event.get("body")
 	)
-
-
-def aws_layer(handler: Callable, req: dict) -> dict:
-	return framework_layer(aws_to_request, response_to_aws, handler, req)
