@@ -19,7 +19,7 @@ req = flask.Request({
 	"QUERY_STRING": "name=jhonny",
 	"SERVER_NAME": "Test",
 	"CONTENT_TYPE": "application/json",
-	"CONTENT_LENGTH": 0
+	"CONTENT_LENGTH": "0"
 })
 req.url_rule = "/somewhere/<id>" # pointless
 req.view_args = {"id": "1"}

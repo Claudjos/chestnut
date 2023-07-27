@@ -18,7 +18,7 @@ def test_get():
 		"QUERY_STRING": "name=jhonny",
 		"SERVER_NAME": "Test",
 		"CONTENT_TYPE": "application/json",
-		"CONTENT_LENGTH": 0
+		"CONTENT_LENGTH": "0"
 	})
 	req.url_rule = "/somewhere/<id>" # pointless
 	req.view_args = {"id": "1"}
@@ -39,7 +39,7 @@ def test_post():
 		"QUERY_STRING": "n",
 		"SERVER_NAME": "Test",
 		"CONTENT_TYPE": "application/json",
-		"CONTENT_LENGTH": len(body)
+		"CONTENT_LENGTH": str(len(body))
 	})
 	req.url_rule = "/somewhere" # pointless
 	req.view_args = {}
