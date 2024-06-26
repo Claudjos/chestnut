@@ -22,5 +22,6 @@ def azure_to_request(req: func.HttpRequest) -> Request:
 		uri=req.url,
 		headers=req.headers,
 		route=req.route_params,
+		files=req.files,
 		body=req.get_body()
 	)
