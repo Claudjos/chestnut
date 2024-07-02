@@ -24,5 +24,6 @@ def gcp_to_request(req: flask.Request) -> Request:
 		headers=req.headers,
 		route=req.view_args,
 		query={key: req.args.getlist(key) for key in list(req.args)},
+		files=req.files,
 		body=req.stream.read()
 	)
